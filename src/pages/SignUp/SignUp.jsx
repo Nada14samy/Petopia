@@ -4,6 +4,7 @@ import { Link , useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import Input from "../../components/generic/Input";
 import axios from "axios";
+import API_BASE_URL from "../../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Button from "../../components/generic/Button";
@@ -27,7 +28,7 @@ const SignUp = () => {
   const onSubmit = async ({ name, email, password, rePassword }) => {
     try {
       await axios.post(
-        "customers/signup",
+        `${API_BASE_URL}customers/signup`,
         {
           name,
           email,

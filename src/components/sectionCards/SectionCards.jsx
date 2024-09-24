@@ -4,6 +4,7 @@ import bg_sections from "../../images/section-cards/bg-section.png";
 import Card from "../Card/Card";
 import Loading from "../Loading/Loading";
 import axios from "axios";
+import API_BASE_URL from "../../api";
 import ErrorSection from "../error/ErrorSection";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -21,7 +22,7 @@ const SectionCards = (props)=>{
             let endPoint;
             switch (type) {
                 case "Cat":
-                    endPoint = `pets?type=Cat&limit=5`;
+                    endPoint = `${API_BASE_URL}pets?type=Cat&limit=5`;
                     break;
                 case "Dog":
                     endPoint = `pets?type=Dog&limit=5`;

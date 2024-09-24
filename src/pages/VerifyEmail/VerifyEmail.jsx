@@ -1,6 +1,7 @@
 import React , {useState} from "react";
 import Button from "../../components/generic/Button";
 import axios from "axios";
+import API_BASE_URL from "../../api";
 import bg_image from "../../images/signup/signup-bg.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -24,7 +25,7 @@ const VerifyEmail=()=>{
         }
         try{
             if(flag){
-                const res = await axios.patch('customers/verify-email' , { 
+                const res = await axios.patch(`${API_BASE_URL}customers/verify-email` , { 
                     "token" : otp
                 }); 
                 toast.success("Registration successful!", { autoClose: 2000 });

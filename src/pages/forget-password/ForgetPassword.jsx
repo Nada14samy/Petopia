@@ -3,6 +3,7 @@ import { Link , useNavigate } from "react-router-dom";
 import bg_image from "../../images/signup/signup-bg.png";
 import { FaArrowLeft } from "react-icons/fa";
 import axios from "axios";
+import API_BASE_URL from "../../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const ForgetPassword = ()=>{
@@ -18,7 +19,7 @@ const ForgetPassword = ()=>{
         setIsLoading(true);
         try{
             if(flag){
-                const res = await axios.post(`customers/forgotPassword` , {"email" : email});
+                const res = await axios.post(`${API_BASE_URL}customers/forgotPassword` , {"email" : email});
                 toast.success("Check your email !", { autoClose: 2000 });
                 console.log(res)
                 // if(res.status === 200){

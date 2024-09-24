@@ -5,6 +5,7 @@ import bg_card_3 from "../../images/homepage/Ellipse4.png";
 import no_image from "../../images/section-cards/no-image.png";
 import { Link , useParams , useNavigate } from "react-router-dom";
 import axios from "axios";
+import API_BASE_URL from "../../api";
 import Loading from "../../components/Loading/Loading";
 import Cookies from 'js-cookie';
 import moment from "moment";
@@ -22,7 +23,7 @@ const CardDetails = () => {
     useEffect(()=>{
         let fetchData = async ()=>{
             try{
-                let res = await axios.get(`pts/${id}`,
+                let res = await axios.get(`${API_BASE_URL}pets/${id}`,
                     {headers: { Authorization: `Bearer ${token}` }}
                 );
                 setCardDetails(res.data.data.data);

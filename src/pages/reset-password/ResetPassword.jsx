@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import bg_image from "../../images/signup/signup-bg.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import API_BASE_URL from "../../api";
 const ResetPassword = () =>{
     const [password , setPassword] = useState("");
     const [rePassword , setRePassword] = useState("");
@@ -16,7 +17,7 @@ const ResetPassword = () =>{
         password.length <= 8 || rePassword !== password ? flag = false : flag = true;
         try{
             if(flag){
-                const res = await axios.patch(`http://farm-build-your-portfolio-project-2.onrender.com/api/v1/customers/resetPassword/${token}`, 
+                const res = await axios.patch(`${API_BASE_URL}customers/resetPassword/${token}`, 
                 {
                     "password" : password,
                     "passwordConfirm" : rePassword
