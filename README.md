@@ -53,7 +53,6 @@ The site supports both Arabic and English, making it easy for users to choose th
 - React Router: For managing page navigation.
 - js-cookie: For managing and storing cookies.
 - react-toastify: For displaying notifications.
-- Sass: For writing more organized CSS styles.
 - Tailwind CSS: A CSS framework for designing the user interface.
 - react-scroll-trigger: For interacting with content during scrolling.
 - Swiper: For adding sliders to the UI.
