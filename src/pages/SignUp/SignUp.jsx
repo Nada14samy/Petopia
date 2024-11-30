@@ -79,12 +79,12 @@ const SignUp = () => {
 
   return (
     <>
-    <FlexSection img={imgSection} >
-      <section className="w-full h-fit flex justify-center items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]"
-        style={{backgroundImage: `url(${bg_image})`}}>
+    <FlexSection img={bg_image} >
+      <section className="w-full h-fit my-10 flex justify-center items-center"
+        >
         <ToastContainer />
         <div
-          className="container  w-[400px] max-[405px]:flex max-[405px]:flex-col max-[405px]:justify-center max-[405px]:h-screen  h-fit px-7 py-6 shadow-[0px_1px_20px_#dbd6d6] rounded-[10px]">
+          className="container w-[500px] max-[405px]:flex max-[405px]:flex-col max-[405px]:justify-center max-[405px]:h-screen  h-fit px-7 py-6 shadow-[0px_1px_20px_#dbd6d6] rounded-[10px]">
           <div className="my-2 text-center">
             <p className="mb-6 text-[35px]">{t("Sign Up")}</p>
           </div>
@@ -146,7 +146,7 @@ const SignUp = () => {
               {/* {form.rePassword !== form.password && accept && (<p className=" text-[red] text-sm">{t("password dose not match")}</p>)} */}
             </div>
             <button 
-            className={`w-full rounded-[3px] mt-4 bg-[#59bbda] py-2 text-lg text-white 
+            className={`w-full rounded-[3px] mt-4 bg-[#59bbda] py-2 text-lg text-light 
               ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
             disabled={isLoading} 
             >
@@ -155,7 +155,7 @@ const SignUp = () => {
           </form>
           <div className="flex flex-col justify-center items-center mt-2">
             <p className="text-lg">{t("Already have an account")}</p>
-            <Link to="/login" className="font-semibold text-xl text-black">
+            <Link to="/login" className="font-semibold text-xl text-primary">
               {t("Log In")}
             </Link>
           </div>

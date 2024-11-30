@@ -7,7 +7,6 @@ import { Link , useParams , useNavigate } from "react-router-dom";
 import axios from "axios";
 import API_BASE_URL from "../../api";
 import Loading from "../../components/Loading/Loading";
-import Cookies from 'js-cookie';
 import moment from "moment";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -18,15 +17,14 @@ import Header from "../../components/Header/Header.jsx";
 const CardDetails = () => {
     const[cardDetails , setCardDetails]= useState(null);
     const {id} = useParams();
-    const token = Cookies.get('token');
     const navigate = useNavigate();
-    console.log(cardDetails);
     useEffect(()=>{
         let fetchData = async ()=>{
+         
             try{
-                let res = await axios.get(`${API_BASE_URL}pets/${id}`,
-                    {withCredentials: true }
-                );
+                let res = await axios.get(`${API_BASE_URL}pets/${id}`,{  
+                    withCredentials: true,
+                });
                 setCardDetails(res.data.data.data);
                 console.log(setCardDetails(res.data.data.data));
                 console.log(res);
@@ -42,7 +40,7 @@ const CardDetails = () => {
             }
         }
         fetchData();
-    }, [id,token,navigate]);
+    }, [id]);
 
     if (!cardDetails){
         return <div className="w-full h-screen flex justify-center items-center"> <Loading /> </div> ;

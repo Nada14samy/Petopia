@@ -34,8 +34,9 @@ function Setting() {
       try{
         let res = await axios.patch(`${API_BASE_URL}customers/updateMe` , filteredForm,{
           headers: {
-            Authorization: `Bearer ${Cookies.get('token')}`
-          }
+            Authorization: `Bearer ${Cookies.get('jwt')}`
+          },
+          withCredentials: true,
         });
         console.log(res);
         if(res.status === 200){

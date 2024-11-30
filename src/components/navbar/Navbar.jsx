@@ -12,7 +12,9 @@ const NavbarBrand = ({userProfile}) => {
   const {t} = useTranslation();
   const [lng, setLng] = useState(Cookies.get("i18next") || "en");
   const [user , setUser] = useState(false);
-  
+  // Cookies.remove('jwt');
+  // Cookies.remove('userId');
+  // Cookies.remove('id');
   useEffect(()=>{
        window.document.dir = i18n.dir(lng);
        Cookies.set("i18next", lng);
@@ -97,7 +99,7 @@ const NavbarBrand = ({userProfile}) => {
       </h1>
   </div>
         <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-4">
-          {!Cookies.get('token') ?
+          {!Cookies.get('jwt') ?
             <>
               <div className="btn flex justify-center items-center rounded-xl px-5 py-0 bg-primary">
                 <Link to="/signup" className="text-[#fff] m-0 p-0">

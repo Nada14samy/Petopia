@@ -41,13 +41,15 @@ const VerifyEmail=()=>{
             try {
                     const res = await axios.patch(`${API_BASE_URL}customers/verify-email`, {
                         "token": fullOtp
+                    },{
+                        withCredentials: true,
                     });
                     toast.success(t("Registration successful"), { autoClose: 2000 });
                     if (res.status === 200) {
-                        const token = res.data.token;
-                        Cookies.set('token', token, { expires: 365, path: '/' });
+                        // const token = res.data.token;
+                        // Cookies.set('jwt', token, { expires: 365, sameSite: 'None' , path: '/' });
                         const id = res.data.data.user._id;
-                        Cookies.set("id" , id , {expires: 365, path: '/'});
+                        Cookies.set("userId" , id , {expires: 365, sameSite: 'None' , path: '/'});
                         setTimeout(() => {
                             navigate("/" );
                         }, 3000);

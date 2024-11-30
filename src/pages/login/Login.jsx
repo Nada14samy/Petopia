@@ -40,15 +40,17 @@ const Login = ()=>{
             {
               "email": form.email,
               "password" : form.password,
+            },{
+              withCredentials: true,
             }
           );
           console.log(res)
           toast.success(t("Hi, Wellcome Back"), { autoClose: 2000 });
          if(res.status === 200){
-            const token = res.data.token;
+            // const token = res.data.token;
             const id = res.data.data.user._id;
-            Cookies.set('token', token, { expires: 365, path: '/' });
-            Cookies.set("id" , id , {expires: 365, path: '/'});
+            // Cookies.set('jwt', token, { expires: 365, path: '/' });
+            Cookies.set("userId" , id , {expires: 365, path: '/'});
             setTimeout(()=>{
               navigate("/");
             },3000);
@@ -65,9 +67,9 @@ const Login = ()=>{
     };
     return(
         <>
-        <FlexSection img={imgSection}>
-            <section className="w-full h-screen flex justify-center items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]"
-                style={{backgroundImage: `url(${bg_image})`}} >
+        <FlexSection img={bg_image}>
+            <section className="w-full h-screen flex justify-center items-center"
+                 >
                     <ToastContainer />
                 <div
                     className="container
@@ -112,7 +114,7 @@ const Login = ()=>{
                         <div className="text-end">
                             <Link to="/forgot-password" className="mb-6 text-[16px] underline text-[#00f]">{t("forgot password")}</Link>
                         </div>
-                        <button className={`w-full rounded-[3px] mt-4 bg-primary py-2 text-lg text-white
+                        <button className={`w-full rounded-[3px] mt-4 bg-primary py-2 text-lg text-light
                           ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                           disabled={isLoading} 
                         >

@@ -18,18 +18,18 @@ function LogOut() {
       setLoading(true)
         try{
             let res= await axios.get(`${API_BASE_URL}customers/logout`,{
-              headers: {
-                Authorization: `Bearer ${Cookies.get('token')}`
-              }
+              withCredentials: true,
             });
             if(res.status === 200){
-              Cookies.remove('token');
+              Cookies.remove('jwt');
+              Cookies.remove('userId');
             }
         }catch(err){
           console.log(err);
             if (err.response && err.response.status === 401) {
               // إذا كان الـ token غير صالح
-              Cookies.remove('token');
+              Cookies.remove('jwt');
+              Cookies.remove('userId');
               toast.error('Your session has expired. Please log in again.' , {autoClose: 2000});
               // navigate('/login'); // إعادة التوجيه لتسجيل الدخول
             } else {

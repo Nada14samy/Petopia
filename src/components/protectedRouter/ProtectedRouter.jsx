@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 import Cookies from 'js-cookie';
 
 const ProtectedRouter = ({children})=>{
-    const token = Cookies.get("token");
+    const token = Cookies.get("jwt");
     return token? children : <Navigate to="/signup" />;
 }
 
