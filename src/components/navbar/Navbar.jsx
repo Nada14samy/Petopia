@@ -16,7 +16,7 @@ const NavbarBrand = () => {
   // console.log(userData);
   const {t} = useTranslation();
   const [lng, setLng] = useState(Cookies.get("i18next") || "en");
-  const [user , setUser] = useState(false);
+  // const [user , setUser] = useState(false);
   useEffect(()=>{
        window.document.dir = i18n.dir(lng);
        Cookies.set("i18next", lng);
@@ -54,21 +54,10 @@ const NavbarBrand = () => {
               </>
               :
               <>
-                <button onClick={() => setUser(!user)} type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                  <span className="sr-only">Open user menu</span>
+                <Link to="/profile" type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                  {/* <span className="sr-only">Open user menu</span> */}
                   <img className="w-10 h-10 rounded-full" src={imgUser} alt="" />
-                </button>
-                <div className={`z-50 ${user ? "block" : "hidden"} absolute top-5 right-2 my-4 text-base w-[200px] list-none bg-primary divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 `} id="user-dropdown">
-                <Me />
-                  <ul className="py-2" aria-labelledby="user-menu-button">
-                    <li>
-                      <Link to="/profile" className="block px-4 py-1 text-lg text-light hover:bg-gray-100  hover:text-white">Profile</Link>
-                    </li>
-                    <li>
-                      <Link to="/add-card-pet" className="block px-4 py-1 text-lg text-light hover:bg-gray-100  hover:text-white">Add Card</Link>
-                    </li>
-                  </ul>
-                </div>
+                </Link>
               </>
             }
             <select className="border-[2px] border-solid border-[#000] rounded-[5px]" value={lng} onChange={handleLanguageChange}>

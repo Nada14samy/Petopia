@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import {useNavigate} from "react-router-dom";
 // api
 import axios from "axios";
 import API_BASE_URL from "../../api.js";
@@ -13,7 +14,7 @@ import Cookies from 'js-cookie';
 
 function LogOut() {
   const[loading , setLoading] = useState(false);
-
+  const navigate = useNavigate();
   const HandleSubmit = async ()=>{
       setLoading(true)
         try{
@@ -22,6 +23,7 @@ function LogOut() {
             });
             if(res.status === 200){
               Cookies.remove('userId');
+              navigate('/');
             }
         }catch(err){
           console.log(err);
@@ -29,7 +31,7 @@ function LogOut() {
               // إذا كان الـ token غير صالح
               Cookies.remove('userId');
               toast.error('Your session has expired. Please log in again.' , {autoClose: 2000});
-              // navigate('/login'); // إعادة التوجيه لتسجيل الدخول
+              navigate('/'); // إعادة التوجيه لتسجيل الدخول
             } else {
                 toast.error('Something went wrong, please try again later' , {autoClose: 2000});
             }
