@@ -36,7 +36,6 @@ const ForgetPassword = ()=>{
                 }
             }
         }catch(err){
-            console.log(err);
             if(err.message === "Network Error"){
                 toast.error(t("Something went wrong, please try again later"), { autoClose: 2000 });
             }

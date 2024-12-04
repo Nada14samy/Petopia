@@ -5,7 +5,6 @@ import { useParams , useNavigate } from "react-router-dom";
 import API_BASE_URL from "../../api";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Cookies from 'js-cookie';
 import { useTranslation } from "react-i18next";
 import BeatLoader from "react-spinners/BeatLoader";
 import imgSection from "../../images/building-page/building-page.png";
@@ -35,18 +34,14 @@ const ResetPassword = () =>{
                 },{
                     withCredentials: true,
                 });
-                console.log(res);
                 toast.success( t("Password changed successfully"), { autoClose: 2000 });
                 if(res.status === 200){
-                    // const token = res.data.token;
-                    // Cookies.set('jwt', token, { expires: 365, sameSite: 'None' , path: '/' });
                     setTimeout(() => {
                         navigate("/login");
                     }, 3000);
                 }
             }
         }catch(err){
-            console.log(err);
             if(err.response.data.message === "Token is invalid or has expired"){
                 setErr(t("Token is invalid or has expired"));
             }

@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.active{
+nav .nav-container .navbar .nav-items .nav-item  .active{
     border-bottom: 2px solid #000;
 }
+

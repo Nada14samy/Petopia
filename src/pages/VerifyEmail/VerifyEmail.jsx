@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 import API_BASE_URL from "../../api";
 import bg_image from "../../images/signup/signup-bg.png";
@@ -46,8 +46,6 @@ const VerifyEmail=()=>{
                     });
                     toast.success(t("Registration successful"), { autoClose: 2000 });
                     if (res.status === 200) {
-                        // const token = res.data.token;
-                        // Cookies.set('jwt', token, { expires: 365, sameSite: 'None' , path: '/' });
                         const id = res.data.data.user._id;
                         Cookies.set("userId" , id , {expires: 365, sameSite: 'None' , path: '/'});
                         setTimeout(() => {

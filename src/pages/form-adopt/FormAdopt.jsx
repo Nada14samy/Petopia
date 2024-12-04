@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
 // import img from "../../images/form/form.png";
-import bg from "../../images/signup/signup-bg.png";
-// import Header from "../../components/Header/Header.jsx";
+import Header from "../../components/Header/Header.jsx";
 import axios from "axios";
 import API_BASE_URL from "../../api.js";
-import Cookies from "js-cookie";
 import BeatLoader from "react-spinners/BeatLoader";
 import { toast , ToastContainer } from 'react-toastify';
 import "react-toastify/ReactToastify.css";
-import imgSection from "../../images/building-page/building-page.png";
 import FlexSection from "../../components/Flex-Section/FlexSection.jsx";
 
 const FormAdopt = () => {
@@ -61,7 +58,6 @@ const FormAdopt = () => {
             }))
         }
     }
-    console.log(Form);
 
     // fetch data
     const HandleSubmit = async (e)=>{
@@ -111,17 +107,13 @@ const FormAdopt = () => {
                         "jobTitle": Form.job.jobTitle
                     }
                 },{
-                    headers:{
-                        Authorization: `Bearer ${Cookies.get('token')}`,
-                    }
-                })
-                console.log(res);
+                    withCredentials: true,
+                });
                 if(res.status === 201){
                     console.log("success");
                     toast.success("sccess adoption" , {autoClose : 2000})
                 }
             }catch(err){
-                console.log(err);
                 if(err.status && err.response.data.error.statusCode === 500){
                     if(err.response.data && err.response.data.message.includes("index: email_1")){
                         window.scrollTo({
@@ -144,12 +136,10 @@ const FormAdopt = () => {
 
         return (
             <>
-                {/* <Header /> */}
-                <FlexSection img={imgSection}>
-                <header className="w-full h-fit flex justify-center py-5 items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]"
-                    style={{ backgroundImage: `url(${bg})` }} >
+                <Header />
+                <FlexSection>
                     <ToastContainer />
-                    <div className="w-11/12 m-auto flex flex-col justify-center items-center h-fit" >
+                    <div className="w-11/12 m-auto py-5 my-5 flex flex-col justify-center items-center h-fit" >
                         <form className="flex flex-col w-full m-auto" onSubmit={HandleSubmit}>
                             {/* name */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-4">
@@ -408,7 +398,6 @@ const FormAdopt = () => {
                             </button>
                         </form>
                     </div>
-                </header>
                 </FlexSection>
             </>
         )

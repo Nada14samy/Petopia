@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import BeatLoader from "react-spinners/BeatLoader";
 import axios from "axios";
 import API_BASE_URL from "../../api";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-// import NavbarBrand from "../../components/navbar/Navbar.jsx";
-import Cookies from "js-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from 'react-router-dom';
 import FlexSection from "../../components/Flex-Section/FlexSection.jsx";
-import img from "../../images/building-page/building-page.png";
+// import img from "../../images/building-page/building-page.png";
+import Header from "../../components/Header/Header.jsx";
+import bg_image from "../../images/signup/signup-bg.png";
 
 function CreateCard() {
     // const token = Cookies.get('token');
@@ -99,22 +99,21 @@ function CreateCard() {
                 let res = await axios.post(`${API_BASE_URL}pets`, formData, {
                     headers: {
                       'Content-Type': 'multipart/form-data',
-                      Authorization: `Bearer ${Cookies.get('token')}`,
                     },
+                        withCredentials: true,
                   });
-                  
                 console.log(res);
                 console.log("success")
-                // toast.success("Pet added successfully!", { autoClose: 2000 });
+                toast.success("Pet added successfully!", { autoClose: 2000 });
             }catch(err){
                 console.log(err);
                 if(err.message === "Network Error"){
                     console.log("net work")
-                    // toast.error("Something went wrong, please try again later", { autoClose: 2000 });
+                    toast.error("Something went wrong, please try again later", { autoClose: 2000 });
                 }
                 if(err.response.data.message === "You are not logged in! Please log in to get access."){
                     console.log("login")
-                    // toast.error("You are not logged in!", { autoClose: 2000 });
+                    toast.error("You are not logged in!", { autoClose: 2000 });
                     setTimeout(()=>{
                         navigate("/signup");
                     } , 4000);
@@ -130,9 +129,10 @@ function CreateCard() {
     }
   return ( 
       <>
-        <FlexSection img={img}>
-          <header className="w-full h-fit py-5 flex justify-center items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]" style={{ backgroundImage: 'url(./signup-bg.png)' }}>
-            
+      <Header />
+        <FlexSection img={bg_image}>
+          <header className="w-full h-fit py-5 flex justify-center items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]">
+            <ToastContainer />
               <div className=" w-11/12 max-[405px]:flex max-[405px]:flex-col max-[405px]:justify-center max-[405px]:h-screen  h-fit px-7 py-6  rounded-[10px]">
                   <form className="flex flex-col w-full m-auto" onSubmit={HandleSubmit}>
                       <div className="mb-2">

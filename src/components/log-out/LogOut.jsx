@@ -1,4 +1,4 @@
-import React , {useState} from 'react';
+import {useState} from 'react';
 // api
 import axios from "axios";
 import API_BASE_URL from "../../api.js";
@@ -21,14 +21,12 @@ function LogOut() {
               withCredentials: true,
             });
             if(res.status === 200){
-              Cookies.remove('jwt');
               Cookies.remove('userId');
             }
         }catch(err){
           console.log(err);
             if (err.response && err.response.status === 401) {
               // إذا كان الـ token غير صالح
-              Cookies.remove('jwt');
               Cookies.remove('userId');
               toast.error('Your session has expired. Please log in again.' , {autoClose: 2000});
               // navigate('/login'); // إعادة التوجيه لتسجيل الدخول
