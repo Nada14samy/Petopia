@@ -4,14 +4,14 @@ import AOS from 'aos';
 import 'aos/dist/aos.css'; //import aos styles
 import CountUp from "react-countup";
 import ScrollTrigger from "react-scroll-trigger";
-import image_about_1 from "../../images/homepage/image11.png";
-import image_about_2 from "../../images/homepage/image12.png";
-import image_about_3 from "../../images/homepage/image13.png";
-import image_14 from "../../images/homepage/image14.png";
+import image_about_1 from "../../images/homepage/image11.webp";
+import image_about_2 from "../../images/homepage/image12.webp";
+import image_about_3 from "../../images/homepage/image13.webp";
+import image_14 from "../../images/homepage/home-image.webp";
 import image_16 from "../../images/homepage/image16.png";
 import image_8 from "../../images/homepage/image8.png";
-import Group7 from "../../images/homepage/Group7.png";
-import image18 from "../../images/homepage/image18.png";
+import Group7 from "../../images/homepage/adopt.webp";
+import image18 from "../../images/homepage/image_1.webp";
 import bg_image_1 from "../../images/background-image/bg.png";
 import bg_image_2 from "../../images/homepage/Ellipse4.png";
 import bg_image_3 from "../../images/homepage/Rectangle7.png";
@@ -65,12 +65,14 @@ const SectionsHome = () => {
                             <h3 className="text-3xl">who are you?</h3>
                         </div>
                         <div className="text-title flex mt-10 h-fit max-lg:flex-col max-lg:justify-center max-lg:items-center">
-                            <div className="image w-1/2 max-lg:w-11/12">
-                                <img className="w-full" src={image_14} alt="" data-aos="zoom-in-right" data-aos-duration="3000"/>
+                            <div className="image w-[50%] max-lg:w-11/12">
+                                <div className="w-full h-[300px] flex justify-center">
+                                    <img className=" h-full" src={image_14} alt="" data-aos="zoom-in-right" data-aos-duration="3000"/>
+                                </div>
                                 <img src={image_16} alt="" className="absolute bottom-[0px] left-[0px]" />
                             </div>
-                            <div className="w-1/2 my-5 px-5 mx-3 max-lg:w-11/12" data-aos="fade-up" data-aos-duration="3000">
-                                <h3 className="text-3xl font-bold">we save <span className="text-teal-500 text-primary">the pets</span></h3>
+                            <div className="w-[50%] my-5 px-2 mx-2 max-lg:w-11/12" data-aos="fade-up" data-aos-duration="3000">
+                                <h3 className="text-3xl mb-5 font-bold">we save <span className="text-teal-500 text-primary">the pets</span></h3>
                                 <p className="my-5 font-medium">
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Dicta hic doloremque quod saepe incidunt, culpa fuga veniam fugiat asperiores delectus.
                                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique exercitationem saepe asperiores reiciendis? Reiciendis praesentium, sint nobis eos ad adipisci odio quisquam animi officiis ipsam. Voluptas asperiores suscipit similique, vitae nulla tenetur quidem doloremque dicta tempora, maiores quibusdam, eveniet nesciunt!</p>
@@ -138,21 +140,21 @@ const SectionsHome = () => {
                             <ul className="flex mb-20 w-full max-lg:justify-center">
                                 <li className="w-1/2 " data-aos="flip-left">
                                     <span className="p-3 px-5 bg-cyan-500 text-light rounded-full my-5 text-2xl bg-primary">1</span>
-                                    <p className="my-7 text-xl font-bold">create account</p>
+                                    <p className="my-7 pt-4 text-xl font-bold">create account</p>
                                 </li>
                                 <li className="w-1/2" data-aos="flip-left">
                                     <span className="p-3 px-5 bg-cyan-500 text-light rounded-full my-5 text-2xl bg-primary">2</span>
-                                    <p className="my-7 text-xl font-bold">find your pet</p>
+                                    <p className="my-7 pt-4 text-xl font-bold">find your pet</p>
                                 </li>
                             </ul>
                             <ul className="flex w-full">
                                 <li className="w-1/2" data-aos="flip-left">
                                     <span className="p-3 px-5 bg-cyan-500 text-light rounded-full my-5 text-2xl bg-primary">3</span>
-                                    <p className="my-7 text-xl font-bold">complete adaption form</p>
+                                    <p className="my-7 pt-4 text-xl font-bold">complete adaption form</p>
                                 </li>
                                 <li className="w-1/2" data-aos="flip-left">
                                     <span className="p-3 px-5 bg-cyan-500 text-light rounded-full my-5 text-2xl bg-primary">4</span>
-                                    <p className="my-7 text-xl font-bold">take your pet home</p>
+                                    <p className="my-7 pt-4 text-xl font-bold">take your pet home</p>
                                 </li>
                             </ul>
                         </div>
@@ -168,14 +170,14 @@ const SectionsHome = () => {
                         </div>
                         <div className="w-full h-fit flex flex-col justify-center items-center">
                             <div className="w-full flex rounded-full my-12 bg-secondary" data-aos="fade-right" data-aos-duration="3000">
-                                <img className="rounded-full" src={image18} alt="" />
+                                <img className="w-[300px] h-[280px] bg-light m-3 rounded-full" src={image18} alt="" />
                                 <div className="flex flex-col justify-center  mx-10">
                                     <h4 className="text-2xl mb-4">Lorem ipsum dolor sit amet.</h4>
                                     <p className="pe-12">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad pariatur magnam totam excepturi. Similique magnam magni necessitatibus mollitia dignissimos ipsum amet repudiandae ex debitis. Consequuntur expedita excepturi in facilis tenetur.</p>
                                 </div>
                             </div>
                             <div className="w-full flex rounded-full my-12 bg-secondary" data-aos="fade-left" data-aos-duration="3000">
-                                <img className="rounded-full" src={image18} alt="" />
+                                <img className="w-[300px] h-[280px] bg-light m-3 rounded-full" src={image18} alt="" />
                                 <div className="flex flex-col justify-center  mx-10">
                                     <h4 className="text-2xl mb-4">Lorem ipsum dolor sit amet.</h4>
                                     <p className="pe-12">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad pariatur magnam totam excepturi. Similique magnam magni necessitatibus mollitia dignissimos ipsum amet repudiandae ex debitis. Consequuntur expedita excepturi in facilis tenetur.</p>

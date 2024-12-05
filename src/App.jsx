@@ -23,6 +23,7 @@ import BuildingPage from "./pages/building-Page/BuildingPage.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import Me from "./components/Me/Me.jsx";
 import Edit from "./components/Edit/Edit.jsx";
+import UpDataPassword from "./components/UpData-Password/UpDataPassword.jsx";
 
 const App = () => {
     const [isLoading , setIsLoading] = useState(false);
@@ -84,7 +85,7 @@ const App = () => {
                 <Route path="/message" element={<BuildingPage />} />
                 <Route path="/profile" element={<Profile />}>
                   <Route index element={<Me />} />
-                  <Route path="setting" element={<Me />} />
+                  <Route path="setting" element={<UpDataPassword />} />
                   <Route path="edit" element={<Edit />} />
                 </Route>
               </Routes>

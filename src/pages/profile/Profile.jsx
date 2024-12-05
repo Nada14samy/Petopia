@@ -4,7 +4,7 @@ import { Link , NavLink , Outlet } from 'react-router-dom';
 import LogOut from "../../components/log-out/LogOut.jsx";
 // import Setting from '../../components/Setting/Setting.jsx';
 // icons
-import { FaHouseUser , FaComment , FaEnvelope ,FaHeart , FaSignOutAlt } from "react-icons/fa";
+import { FaHouseUser , FaComment , FaEnvelope ,FaHeart , FaSignOutAlt , FaCogs } from "react-icons/fa";
 // images
 // import img_user from "../../images/section-cards/no-image.png";
 
@@ -14,13 +14,13 @@ function Profile() {
   return (
     <>
       <section className="profile w-full h-screen ">
-        <div className="profile-container w-full h-full flex relative">
-          <aside className="profile-sidebar w-[20%] bg-primary flex flex-col items-center fixed top-0 left-0 bottom-0">
+        <div className="profile-container w-full h-full flex flex-wrap max-lg:block relative max-lg:static">
+          <aside className="profile-sidebar w-[20%] max-lg:w-full max-lg:h-[15%] bg-primary flex max-lg:flex-row flex-col items-center fixed top-0 left-0 bottom-0">
             <div className='my-5'>
               <h1 className='text-[45px] text-light'>Petopia</h1>
             </div>
-            <div className='profile-nav w-full mt-10 h-full flex flex-col justify-evenly items-center'>
-              <ul className="profile-items h-full flex flex-col gap-5">
+            <div className='profile-nav w-full mt-10 h-full flex flex-col max-lg:flex-row justify-evenly items-center'>
+              <ul className="profile-items h-full flex flex-col max-lg:flex-row gap-5">
                 <li className='profile-link w-full flex items-center gap-2'>
                   <span className='text-xl text-light'>
                     <FaHouseUser />
@@ -29,7 +29,7 @@ function Profile() {
                 </li>
                 <li className='profile-link flex items-center gap-2'>
                   <span className='text-xl text-light'>
-                    <FaHouseUser />
+                    <FaCogs />
                   </span>
                   <NavLink to="/profile/setting" className="nav-profile-link text-xl text-light">Setting</NavLink>
                 </li>
@@ -60,7 +60,7 @@ function Profile() {
               </div>
             </div>
           </aside>
-          <article className='w-[80%] h-full absolute right-0 bg-[#e7e5e5a1] '>
+          <article className='w-[80%] h-full absolute max-lg:static right-0 max-lg:w-full bg-[#e7e5e5a1] '>
             <div className="w-full h-full flex justify-center items-center">
               <section className='w-[85%]  h-full '>
                 <Outlet />
