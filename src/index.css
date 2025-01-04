@@ -1,7 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+body{
+    font-family: "Tajawal", serif;
+}
 nav .nav-container .navbar .nav-items .nav-item  .active{
     border-bottom: 2px solid #000;
 }

@@ -4,19 +4,14 @@ import { useTranslation } from "react-i18next";
 import Cookies from 'js-cookie';
 import i18n from '../../Translation.js';
 import imgUser from "../../images/section-cards/no-image.png";
-// import {UserContext} from "../Me/Me.jsx";
-// api
-// import API_BASE_URL from '../../api';
-// import axios from "axios";
+import logo from "../../images/navbar/logo-petopia.webp";
+import { FaBars , FaTimes} from "react-icons/fa";
 
-import Me from "../Me/Me.jsx";
 
 const NavbarBrand = () => {
-  // const userData = useContext(UserContext);
-  // console.log(userData);
   const {t} = useTranslation();
   const [lng, setLng] = useState(Cookies.get("i18next") || "en");
-  // const [user , setUser] = useState(false);
+  const [clickNav , setClickNav] = useState(false);
   useEffect(()=>{
        window.document.dir = i18n.dir(lng);
        Cookies.set("i18next", lng);
@@ -31,61 +26,52 @@ const NavbarBrand = () => {
 
   return (
     <>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
-        <div className="nav-container max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <div className="nav-brand text-2xl font-medium mt-[5px]">
-            <h1 className="text-4xl">
-              <Link to="/">{t('Petopia')}</Link>
+
+      <header className="h-15vh py-5">
+        <nav className='flex justify-between  w-11/12 max-lg:w-[95%] items-center max-lg:h-14 h-14 mx-auto'>
+          <div>
+            <h1 className=" w-[150px]">
+              <Link to="/">
+                <img className="w-full h-full" src={logo} alt={"logo petopia"} />
+              </Link>
             </h1>
           </div>
-          <div className="relative flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse gap-4">
-            {!Cookies.get('userId') ?
-              <>
-                <div className="btn flex justify-center items-center rounded-xl px-5 py-0 bg-primary">
-                  <Link to="/signup" className="text-[#fff] m-0 p-0">
-                    {t('Sign Up')}
+          <div className={`${clickNav
+              ? "top-[15%] flex justify-center py-10 right-0 w-full h-[500px] mb-5 z-[99] bg-primary"
+              : "hidden top-[14%] right-[-100%]"
+            } lg:static lg:flex lg:justify-center lg:w-auto lg:h-auto lg:py-0 lg:mb-0 lg:bg-transparent absolute text-center transition-all duration-500 ease-in-out lg:transition-none lg:opacity-100 w-full min-h-[30vh] opacity-90`}
+          >
+
+            <ul className='flex lg:flex-row mx-auto flex-col lg:items-center lg:gap-[4vw] gap-6 font-sans font-medium item-center'>
+              <li><NavLink to="/">{t('Home')}</NavLink></li>
+              <li><NavLink to="/find-a-pet">{t("Find a pet")}</NavLink></li>
+              <li><NavLink to="/about">{t('About Us')}</NavLink></li>
+            </ul>
+          </div>
+          <div className='flex items-center gap-4'>
+            {
+              Cookies.get('userId') ?
+                <>
+                  <Link to="/profile" type="button" className="flex text-sm bg-gray-800 rounded-full lg:me-0 " id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
+                    <img className="w-10 h-10 rounded-full" src={imgUser} alt="" />
                   </Link>
-                </div>
-                <div className="btn flex justify-center items-center rounded-xl px-5 py-0 bg-primary">
-                  <Link to="/login" className="text-[#fff] m-0 p-0">
-                    {t("Log In")}
-                  </Link>
-                </div>
-              </>
-              :
-              <>
-                <Link to="/profile" type="button" className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-                  {/* <span className="sr-only">Open user menu</span> */}
-                  <img className="w-10 h-10 rounded-full" src={imgUser} alt="" />
-                </Link>
-              </>
+                </>
+                :
+                <>
+                  <button className="rounded-lg px-3 text-light py-2 bg-primary duration-500 hover:bg-darkBlue"><Link to="/login">{t("Log In")}</Link></button>
+                </>
             }
-            <select className="border-[2px] border-solid border-[#000] rounded-[5px]" value={lng} onChange={handleLanguageChange}>
+            <select className="border-[2px] py-2 border-solid border-primary rounded-[5px]" value={lng} onChange={handleLanguageChange}>
               <option value="en">En</option>
               <option value="ar">Ar</option>
             </select>
+            <button onClick={() => setClickNav(!clickNav)} className="cursor-pointer text-4xl lg:hidden">
+              <span className={`${clickNav ? "hidden" : "block"}`}><FaBars /></span>
+              <span className={`${clickNav ? "block" : "hidden"}`}><FaTimes /></span>
+            </button>
           </div>
-          <div className="navbar items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-user">
-            <ul className="nav-items flex">
-              <li className="nav-item m-3">
-                <NavLink to="/" className="nav-link text-black font-medium text-lg">
-                  {t('Home')}
-                </NavLink>
-              </li>
-              <li className="nav-item m-3">
-                <NavLink to="/find-a-pet" className="nav-link text-black font-medium text-lg">
-                  {t("Find a pet")}
-                </NavLink>
-              </li>
-              <li className="nav-item m-3">
-                <NavLink to="/about" className="nav-link text-black font-medium text-lg">
-                  {t('About Us')}
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
     </>
   );
 };

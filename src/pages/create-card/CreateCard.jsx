@@ -9,6 +9,7 @@ import FlexSection from "../../components/Flex-Section/FlexSection.jsx";
 // import img from "../../images/building-page/building-page.png";
 import Header from "../../components/Header/Header.jsx";
 import bg_image from "../../images/signup/signup-bg.png";
+// import Footer from "../../components/Footer/Footer.jsx";
 
 function CreateCard() {
     // const token = Cookies.get('token');
@@ -130,11 +131,9 @@ function CreateCard() {
   return ( 
       <>
       <Header />
-        <FlexSection img={bg_image}>
-          <header className="w-full h-fit py-5 flex justify-center items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]">
-            <ToastContainer />
-              <div className=" w-11/12 max-[405px]:flex max-[405px]:flex-col max-[405px]:justify-center max-[405px]:h-screen  h-fit px-7 py-6  rounded-[10px]">
-                  <form className="flex flex-col w-full m-auto" onSubmit={HandleSubmit}>
+        <FlexSection img={bg_image} classSection={"py-5"}>
+        <ToastContainer />
+        <form className="flex flex-col w-full m-auto" onSubmit={HandleSubmit}>
                       <div className="mb-2">
                           <div className="input-file w-full text-[#59bbda] flex justify-between items-center">
                               <p className="text-[20px]">upLoad image</p>
@@ -280,9 +279,8 @@ function CreateCard() {
                             {isLoading? <BeatLoader color="#fff" /> : <span>Add pet</span>}
                       </button>
                   </form>
-              </div>
-          </header>
       </FlexSection>
+      {/* <Footer /> */}
       </>
   )
 }

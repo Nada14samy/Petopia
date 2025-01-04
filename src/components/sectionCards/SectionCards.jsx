@@ -58,7 +58,7 @@ const SectionCards = (props)=>{
         <>
             <section className="component w-full my-14 mx-0 h-fit">
             <ToastContainer />
-                <div className="container w-[91%] m-auto flex justify-center flex-col overflow-x-hidden">
+                <div className="container w-[91%] max-lg:w-[98%] m-auto flex justify-center flex-col">
                     <TypePet logo={props.logo}  type={props.type} />
                     <div className="cards h-fit mt-14 mb-10 flex items-center">
                         {isLoading?(
@@ -71,7 +71,7 @@ const SectionCards = (props)=>{
                             </div>
                         ):
                         <div className="w-full flex flex-col justify-center">
-                            <div className="flex justify-start">
+                            <div className="flex justify-start flex-wrap ">
                                 {showData}
                             </div>
                             {/* the button will only be displayed if showData length is 5 */}

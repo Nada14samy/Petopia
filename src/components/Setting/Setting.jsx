@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 // img
 import img from "../../images/section-cards/user.webp";
 // icon
-import {FaPaintBrush} from "react-icons/fa";
+import {FaPaintBrush , FaHouseUser } from "react-icons/fa";
 // componet
 import { userContext } from "../Me/Me.jsx";
 import StyleProfile from "../Style-Profile/StyleProfile.jsx";
@@ -21,9 +21,10 @@ function Setting() {
   return (
     <>
       <StyleProfile titleChildren={"Profile"} 
+      logo={ <FaHouseUser /> }
       rightChildren={
         <>
-          <div>
+          <div className='py-2'>
             <ul className="flex flex-col gap-7">
               <li className="flex flex-col gap-3">
                 <span className='text-xl font-medium text-primary'>Name</span>
@@ -53,10 +54,9 @@ function Setting() {
       leftChildren={
         <>
           <div className='relative w-[90%] border-[1px] border-solid border-[#aca9a9] rounded-md'>
-            <img className='w-full' src={img} alt="user image" />
-            <div className="absolute bottom-2 right-2 w-[50px] h-[50px] text-light text-2xl rounded-full flex justify-center items-center bg-primary"><FaPaintBrush /></div>
+            <img className='w-full h-[310px]' src={userData.photo ? userData.photo : img} alt="user image" />
           </div>
-          <div>
+          <div className='mt-5 mb-3'>
             <p className="text-start text-3xl">{userData.name}</p>
           </div>
         </>

@@ -1,7 +1,7 @@
 import React , {useState} from 'react'
 import { FaRegEyeSlash ,FaRegEye } from "react-icons/fa";
 
-function InputComponent({label , htmlFor , type="text" , className , onChange , name , id , placeholder , value}) {
+function InputComponent({label , htmlFor , type="text", maxLength , className , onChange , name , id , placeholder , value}) {
   const [showPassword , setShowPassword] = useState(false);
   let inputType = type === "password" && !showPassword ? "password" : "text";
   return (
@@ -15,7 +15,8 @@ function InputComponent({label , htmlFor , type="text" , className , onChange , 
           id={id}
           placeholder={placeholder}
           value={value} 
-          className={`border-[2px] rounded-[5px] border-solid  px-4 py-2 ${className} `}
+          maxLength={maxLength}
+          className={`border-[1px] rounded-[5px] border-solid px-4 py-2 ${className} `}
           />
           {
             type === "password" && 

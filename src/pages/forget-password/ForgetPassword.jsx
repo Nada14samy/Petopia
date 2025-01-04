@@ -28,7 +28,7 @@ const ForgetPassword = ()=>{
         try{
             if(flag){
                 const res = await axios.post(`${API_BASE_URL}customers/forgotPassword` , {"email" : email});
-                toast.success("Check your email !", { autoClose: 2000 });
+                toast.success(t("checkYourEmail"), { autoClose: 2000 });
                 if(res.status === 200){
                     setTimeout(()=>{
                         navigate("/sent-email" , {state : { email }});

@@ -1,14 +1,19 @@
+import { useState } from "react";
 import { Link , useNavigate } from "react-router-dom";
+// api
 import axios from "axios";
 import API_BASE_URL from "../../api";
+// toast
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
-import bg_image from "../../images/signup/signup-bg.png";
+// translation
 import { useTranslation } from "react-i18next";
-import BeatLoader from "react-spinners/BeatLoader";
-import imgSection from "../../images/building-page/building-page.png";
+// components
 import FlexSection from "../../components/Flex-Section/FlexSection.jsx";
+import ButtonComponent from "../../components/Generics/ButtonComponent.jsx";
+import InputComponent from "../../components/Generics/InputComponent.jsx";
+// image
+import bg_image from "../../images/signup/signup-bg.png";
 
 const SignUp = () => {
   const {t} = useTranslation();
@@ -28,6 +33,9 @@ const SignUp = () => {
   const [errorInput , setErrorInput] = useState({
       errorEmail : "",
       errorName : "",
+      errorPhone : "",
+      errorCity : "",
+      errorAddress : ""
   });
  
   // handle on change form
@@ -38,7 +46,11 @@ const SignUp = () => {
     setAccept(true);
      setIsLoading(true);
     setErrorInput({...errorInput , errorEmail : "" , errorName : "" });
-    (form.fullName === "" || form.email === "" || form.email.indexOf("@gmail.com") === -1 || form.password.length < 8 || form.rePassword !== form.password)?flag = false:flag = true;
+    (form.fullName === "" || form.email === "" ||
+       form.email.indexOf("@gmail.com") === -1 ||
+        form.password.length < 8 || form.rePassword !== form.password
+      || form.address === "" || form.city === "" || form.phone.length < 11 
+      )?flag = false:flag = true;
     try {
       if(flag){
        await axios.post(
@@ -54,23 +66,26 @@ const SignUp = () => {
           }
         );
         setTimeout(() => {
-          navigate("/verifyEmail" );
+          navigate("/verifyEmail" , {state : form.email} );
         }, 2000);
       }
     } catch (err) {
-      console.log(err)
-      if (err.response && err.response.data.error.statusCode === 500) {
-        if (err) {
-          if (err.response.data.message === "token is not defined") {
-            setErrorInput({...errorInput , errorEmail: t("This email is already registered. Please use a different email") })
-          }
-          if(err.response.data.stack.includes("index: name_1")){
-            setErrorInput({...errorInput , errorName : t("This user name has been used. Please use a different name")})
-          }
-        }
-      } else {
-        toast.error( t("Something went wrong, please try again later"), { autoClose: 2000 });
+      console.log(err);
+      if (err.response && err.response.data.message === `Duplicate field value: ${form.email}. Please use another value!`){
+        setErrorInput({...errorInput , errorEmail: t("This email is already registered. Please use a different email") });
       }
+      // if (err.response && err.response.data.error.statusCode === 500) {
+      //   if (err) {
+      //     if (err.response.data.message === "token is not defined") {
+      //       setErrorInput({...errorInput , errorEmail: t("This email is already registered. Please use a different email") })
+      //     }
+      //     if(err.response.data.stack.includes("index: name_1")){
+      //       setErrorInput({...errorInput , errorName : t("This user name has been used. Please use a different name")})
+      //     }
+      //   }
+      // } else {
+      //   toast.error( t("Something went wrong, please try again later"), { autoClose: 2000 });
+      // }
     }
     finally{
       setIsLoading(false);
@@ -79,79 +94,110 @@ const SignUp = () => {
 
   return (
     <>
-    <FlexSection img={bg_image} >
-      <section className="w-full h-fit my-10 flex justify-center items-center"
-        >
-        <ToastContainer />
-        <div
-          className="container w-[500px] max-[405px]:flex max-[405px]:flex-col max-[405px]:justify-center max-[405px]:h-screen  h-fit px-7 py-6 shadow-[0px_1px_20px_#dbd6d6] rounded-[10px]">
-          <div className="my-2 text-center">
-            <p className="mb-6 text-[35px]">{t("Sign Up")}</p>
+    <FlexSection img={bg_image} classSection={"h-fit"} classDiv={"my-10"}>
+    <ToastContainer />
+      <div className="my-2  text-center">
+            <p className="mb-6 text-[30px]">{t("wellcome")}</p>
           </div>
           <form className="flex flex-col w-full m-auto" onSubmit={HandleSubmit}>
             <div className="mb-2">
-              <label className="w-full font-medium" htmlFor="name">{t("Name")}</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
+              <InputComponent 
                 placeholder={t("Enter your Name")} 
-                type="text" name="fullName" id="name" autoFocus
-                onChange={handleForm} />
+                type="text" 
+                name="fullName" 
+                id="name" 
+                onChange={handleForm} 
+                htmlFor="name"
+                label={t("Name")} 
+                />
               {errorInput.errorName && (<p className=" text-[red] text-sm">{errorInput.errorName}</p>)}
               {form.fullName === "" && accept && (<p className=" text-[red] text-sm">{t("Name is required")}</p>)}
             </div>
             <div className="mb-2">
-              <label className="w-full font-medium" htmlFor="email">{t("Email")}</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
+              <InputComponent 
                 placeholder={t("Enter your Email")}
-                type="email" name="email" id="email"
-                onChange={handleForm} />
+                type="email" 
+                name="email" 
+                id="email"
+                onChange={handleForm}
+                htmlFor="email"
+                label={t("Email")}
+                 />
               {errorInput.errorEmail  && 
               (<p className=" text-[red] text-sm">{errorInput.errorEmail}</p>)}
               {form.email === "" && form.email.indexOf("@gmail.com") === -1  && accept &&
               (<p className=" text-[red] text-sm">{t("Email is required")}</p>)}
             </div>
             <div className="mt-2">
-              <label className="w-full font-medium" htmlFor="password">{t("Password")}</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                placeholder={t("Enter your password")} type="password" name="password" id="password"
-                onChange={handleForm} />
+              <InputComponent 
+                placeholder={t("Enter your password")} 
+                type="password" 
+                name="password" 
+                id="password"
+                onChange={handleForm} 
+                htmlFor="password"
+                label={t("Password")}
+                />
               {form.password.length <= 8  && accept && 
               (<p className=" text-[red] text-sm">{t("password must be more then 8 char")}</p>)}
             </div>
             <div className="mt-2">
-              <label className="w-full font-medium" htmlFor="rePassword">{t("Confirm Password")}</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                placeholder={t("Confirm Password")} type="password" name="rePassword" id="rePassword" 
-                onChange={handleForm} />
+              <InputComponent 
+                placeholder={t("Confirm Password")} 
+                type="password" 
+                name="rePassword" 
+                id="rePassword" 
+                onChange={handleForm} 
+                htmlFor="rePassword"
+                label={t("Confirm Password")}
+                />
               {form.rePassword !== form.password && accept && (<p className=" text-[red] text-sm">{t("password dose not match")}</p>)}
             </div>
             <div className="mt-2">
-              <label className="w-full font-medium" htmlFor="phone">phone</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                placeholder="phone" type="tell" name="phone" id="phone" 
-                onChange={handleForm} />
-              {/* {form.rePassword !== form.password && accept && (<p className=" text-[red] text-sm">{t("password dose not match")}</p>)} */}
+              <InputComponent 
+                placeholder={t("phone")} 
+                type="tell" 
+                name="phone" 
+                id="phone" 
+                onChange={handleForm} 
+                htmlFor="phone"
+                label={t("phone")}
+                />
+              {errorInput.errorPhone && (<p className=" text-[red] text-sm">{errorInput.errorPhone}</p>)}
+              {form.phone.length < 11  && accept && (<p className=" text-[red] text-sm">{t("yourPhoneIsRequired")}</p>)}
             </div>
             <div className="mt-2">
-              <label className="w-full font-medium" htmlFor="city">city</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                placeholder="city" type="text" name="city" id="city" 
-                onChange={handleForm} />
-              {/* {form.rePassword !== form.password && accept && (<p className=" text-[red] text-sm">{t("password dose not match")}</p>)} */}
+              <InputComponent 
+                placeholder={t("city")}
+                 type="text" 
+                 name="city" 
+                 id="city" 
+                onChange={handleForm} 
+                htmlFor="city"
+                label={t("city")}
+                />
+              {errorInput.errorCity && (<p className=" text-[red] text-sm">{errorInput.errorCity}</p>)}
+              {form.city === "" && accept && (<p className=" text-[red] text-sm">{t("cityIsRequired")}</p>)}
             </div>
             <div className="mt-2">
-              <label className="w-full font-medium" htmlFor="address">address</label>
-              <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                placeholder="address" type="text" name="address" id="address" 
-                onChange={handleForm} />
-              {/* {form.rePassword !== form.password && accept && (<p className=" text-[red] text-sm">{t("password dose not match")}</p>)} */}
+              <InputComponent 
+                placeholder={t("address")} 
+                type="text"
+                 name="address" 
+                 id="address" 
+                onChange={handleForm} 
+                htmlFor="address"
+                label={t("address")}
+                />
+              {errorInput.errorAddress && (<p className=" text-[red] text-sm">{errorInput.errorAddress}</p>)}
+              {form.address === "" && accept && (<p className=" text-[red] text-sm">{t("yourAddressIsRequired")}</p>)}
             </div>
-            <button 
-            className={`w-full rounded-[3px] mt-4 bg-[#59bbda] py-2 text-lg text-light 
-              ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
-            disabled={isLoading} 
+            <ButtonComponent 
+              className={`bg-primary `}
+              isLoading={isLoading} 
             >
-              {isLoading? <BeatLoader color="#fff" /> : t("Sign Up")}
-            </button>
+               {t("Sign Up")}
+            </ButtonComponent>
           </form>
           <div className="flex flex-col justify-center items-center mt-2">
             <p className="text-lg">{t("Already have an account")}</p>
@@ -159,8 +205,6 @@ const SignUp = () => {
               {t("Log In")}
             </Link>
           </div>
-        </div>
-      </section>
       </FlexSection>
     </>
   );

@@ -24,6 +24,9 @@ import Profile from "./pages/profile/Profile.jsx";
 import Me from "./components/Me/Me.jsx";
 import Edit from "./components/Edit/Edit.jsx";
 import UpDataPassword from "./components/UpData-Password/UpDataPassword.jsx";
+import Setting from "./components/Setting/Setting.jsx";
+import Category from "./components/Category/Category.jsx";
+import UpDatePet from "./components/UpDate-Pet/UpDatePet.jsx";
 
 const App = () => {
     const [isLoading , setIsLoading] = useState(false);
@@ -83,10 +86,13 @@ const App = () => {
                 <Route path="/all-card/:category" element={<AllCard />} />
                 <Route path="/Form-Adopt" element={<FormAdopt />} />
                 <Route path="/message" element={<BuildingPage />} />
-                <Route path="/profile" element={<Profile />}>
-                  <Route index element={<Me />} />
-                  <Route path="setting" element={<UpDataPassword />} />
-                  <Route path="edit" element={<Edit />} />
+                <Route path="/profile" element={<Me><Profile /></Me>}>
+                  <Route index element={ <Setting /> } />
+                  {/* <Route path="" element={<Setting />} /> */}
+                  <Route path="setting" element={ <UpDataPassword /> } />
+                  <Route path="edit" element={ <Edit /> } />
+                  <Route path="category" element={ <Category /> } />
+                  <Route path="category/update-pet/:idPet" element={ <UpDatePet /> } />
                 </Route>
               </Routes>
             </Suspense>

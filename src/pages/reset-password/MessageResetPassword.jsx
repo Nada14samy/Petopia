@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
 import bg_image from "../../images/signup/signup-bg.png";
 import { useTranslation } from "react-i18next";
-import imgSection from "../../images/building-page/building-page.png";
+
 import FlexSection from "../../components/Flex-Section/FlexSection.jsx";
 
 const MessageResetPassword = ()=>{
     const {t} = useTranslation();
     return(
         <>
-        <FlexSection img={imgSection}>
+        <FlexSection>
             <section className="w-full h-screen flex justify-center items-center bg-center bg-cover bg-no-repeat max-[600px]:bg-[70%]"
                 style={{backgroundImage: `url(${bg_image})`}}>
                 <div

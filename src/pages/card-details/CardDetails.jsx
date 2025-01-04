@@ -13,9 +13,19 @@ import "react-toastify/dist/ReactToastify.css";
 import ErrorSection from "../../components/error/ErrorSection";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import Header from "../../components/Header/Header.jsx";
+import Footer from "../../components/Footer/Footer.jsx";
+import JoinSection from "../../components/JoinSection/JoinSection.jsx";
+import SectionCards from "../../components/sectionCards/SectionCards.jsx";
+import bg_cat from "../../images/homepage/Ellipse3.png";
+import bg_dog from "../../images/homepage/Ellipse4.png";
+import bg_new from "../../images/background-image/image19.png";
+import Cats_image from "../../images/section-cards/cats.png";
+import Dogs_image from "../../images/section-cards/dogs.png";
+import New_image from "../../images/section-cards/new.png";
 
 const CardDetails = () => {
     const[cardDetails , setCardDetails]= useState(null);
+    const [type , setType] = useState("");
     const {id} = useParams();
     const navigate = useNavigate();
     useEffect(()=>{
@@ -26,7 +36,9 @@ const CardDetails = () => {
                     withCredentials: true,
                 });
                 setCardDetails(res.data.data.data);
+                setType(res.data.data.data.type)
                 console.log(setCardDetails(res.data.data.data));
+                console.log(res.data.data.data.type);
                 console.log(res);
             }
             catch(err){
@@ -128,6 +140,14 @@ const CardDetails = () => {
                     </div>
                 </div>
             </section>
+            <div className="w-full h-fit bg-right bg-contain bg-no-repeat" style={{backgroundImage: `url(${bg_new})`}}>
+                <SectionCards type={"New"} logo={New_image} />
+            </div>
+            <div className="w-full h-fit bg-right bg-contain bg-no-repeat" style={{backgroundImage: `url(${type === "Cat" ? bg_cat : bg_dog})`}}>
+                <SectionCards type={type === "Cat" ? "Dog" : "Cat"} logo={type === "Cat"? Cats_image : Dogs_image} />
+            </div>
+            <JoinSection />
+            <Footer />
         </>
     )
 }

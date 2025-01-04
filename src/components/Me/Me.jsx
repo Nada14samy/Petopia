@@ -5,10 +5,10 @@ import axios from "axios";
 
 export const userContext = createContext();
 
-import Setting from "../Setting/Setting.jsx";
+// import Setting from "../Setting/Setting.jsx";
 import Loading from "../Loading/Loading.jsx";
 
-function Me() {
+function Me({children}) {
     const [userData , setUserData]=useState([]);
     const [isLoading , setIsLoading] = useState(true);
     const [Error , setError] = useState(null);
@@ -41,14 +41,14 @@ function Me() {
 
     if (isLoading || Error) {
         return( 
-        <div className="w-full h-full flex justify-center items-center">
+        <div className="w-full h-screen flex justify-center items-center">
                 <Loading />
         </div>
         )};
 
     return (
         <userContext.Provider value={providerValue}>
-          <Setting />
+          {children}
         </userContext.Provider>
     
     );

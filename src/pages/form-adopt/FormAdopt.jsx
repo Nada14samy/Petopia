@@ -7,8 +7,11 @@ import BeatLoader from "react-spinners/BeatLoader";
 import { toast , ToastContainer } from 'react-toastify';
 import "react-toastify/ReactToastify.css";
 import FlexSection from "../../components/Flex-Section/FlexSection.jsx";
+// translations
+import { useTranslation } from "react-i18next";
 
 const FormAdopt = () => {
+     const {t} = useTranslation();
     const [Form, setForm] = useState({
         fullName: "",
         email: "",
@@ -80,7 +83,7 @@ const FormAdopt = () => {
         ];
         if(Form.job.hasJob === "true"){
             if(Form.job.jobTitle === ""){
-                setJobErr("input required");
+                setJobErr(t("jobErr"));
                 flag= false;
             }else{
                 setJobErr("");
@@ -111,7 +114,7 @@ const FormAdopt = () => {
                 });
                 if(res.status === 201){
                     console.log("success");
-                    toast.success("sccess adoption" , {autoClose : 2000})
+                    toast.success(t("successAdoption") , {autoClose : 2000})
                 }
             }catch(err){
                 if(err.status && err.response.data.error.statusCode === 500){
@@ -119,17 +122,17 @@ const FormAdopt = () => {
                         window.scrollTo({
                             top: 700,
                         });
-                        setErr({...err , errInput:"This email is already registered. Please use a different email"})
+                        setErr({...err , errInput: t("This email is already registered. Please use a different email")})
                     }
                 }else {
-                    toast.error("Something went wrong, please try again later", { autoClose: 2000 });
+                    toast.error(t("Something went wrong, please try again later"), { autoClose: 2000 });
                 }
                 
             }finally{
                 setIsLoading(false);
             }
         }else{
-            setErr({...err ,errInput:"" , errAllInput : "input is required" });
+            setErr({...err ,errInput:"" , errAllInput : t("sendMessage") });
             setIsLoading(false);
         }
     }
@@ -143,10 +146,10 @@ const FormAdopt = () => {
                         <form className="flex flex-col w-full m-auto" onSubmit={HandleSubmit}>
                             {/* name */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-4">
-                                <label className="label w-full font-medium" htmlFor="fullName">Full Name</label>
+                                <label className="label w-full font-medium" htmlFor="fullName">{t("fullName")}</label>
                                 <input
                                     className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                                    placeholder="Full Name..."
+                                    placeholder={t("fullName")}
                                     type="text"
                                     name="fullName"
                                     id="fullName"
@@ -156,10 +159,10 @@ const FormAdopt = () => {
                             </div>
                             {/* email */}
                             <div className="mb-5  py-6 px-6">
-                                <label className="w-full font-medium" htmlFor="email">Email</label>
+                                <label className="w-full font-medium" htmlFor="email">{t("email")}</label>
                                 <input
                                     className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                                    placeholder="Email..."
+                                    placeholder={t("email")}
                                     id="email"
                                     name="email"
                                     value={Form.email}
@@ -169,10 +172,10 @@ const FormAdopt = () => {
                             </div>
                             {/* date */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-6">
-                                <label className="w-full font-medium" htmlFor="date">Date</label>
+                                <label className="w-full font-medium" htmlFor="date">{t("date")}</label>
                                 <input
                                     className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                                    placeholder="Date..."
+                                    placeholder={t("date")}
                                     type="date"
                                     name="date"
                                     id="date"
@@ -182,10 +185,10 @@ const FormAdopt = () => {
                             </div>
                             {/* phone number */}
                             <div className="mb-5  py-6 px-4">
-                                <label className="w-full font-medium" htmlFor="phoneNumber">Phone Number</label>
+                                <label className="w-full font-medium" htmlFor="phoneNumber">{t("phoneNumber")}</label>
                                 <input
                                     className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                                    placeholder="Phone Number..."
+                                    placeholder={t("phoneNumber")}
                                     type="tel"
                                     name="phoneNumber"
                                     id="phoneNumber"
@@ -195,7 +198,7 @@ const FormAdopt = () => {
                             </div>
                             {/* job */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-6">
-                                <p className="w-full font-medium text-[21px] mb-3">Do you have a job?</p>
+                                <p className="w-full font-medium text-[21px] mb-3">{t("doYouHaveJob")}</p>
                                 {/* yes */}
                                 <div className="flex items-center mb-3">
                                     <input
@@ -206,7 +209,7 @@ const FormAdopt = () => {
                                         id="trueHasJob"
                                         checked={Form.job.hasJob === "true"}
                                         onChange={HandleJobChange} />
-                                    <label htmlFor="trueHasJob" className="ml-2 cursor-pointer text-[20px]">Yes</label>
+                                    <label htmlFor="trueHasJob" className="ml-2 cursor-pointer text-[20px]">{t("yes")}</label>
                                 </div>
                                 {/* no */}
                                 <div className="flex items-center mb-3">
@@ -217,15 +220,15 @@ const FormAdopt = () => {
                                         id="falseHasJob"
                                         checked={Form.job.hasJob === "false"}
                                         onChange={HandleJobChange} />
-                                    <label htmlFor="falseHasJob" className="ml-2 cursor-pointer text-[20px]">No</label>
+                                    <label htmlFor="falseHasJob" className="ml-2 cursor-pointer text-[20px]">{t("no")}</label>
                                 </div>
                                 {Form.job.hasJob === "" && accept && (<p className='text-err'>{err.errAllInput}</p>)}
                             </div>
                             {/* job Title */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-6">
-                                <label className="label w-full font-medium" htmlFor="jobTitle">Job Title</label>
+                                <label className="label w-full font-medium" htmlFor="jobTitle">{t("jobTitle")}</label>
                                 <input className="w-full rounded-[3px] border-[1px] px-3 py-2 border-[gray] border-solid mt-1"
-                                    placeholder="write your job..."
+                                    placeholder={t("jobTitle")}
                                     type="text"
                                     name="jobTitle"
                                     id="jobTitle"
@@ -237,7 +240,7 @@ const FormAdopt = () => {
                             </div>
                             {/* home Location */}
                             <div className="mb-5  py-6 px-6">
-                                <p className="w-full font-medium text-[21px] mb-3">where is your home?</p>
+                                <p className="w-full font-medium text-[21px] mb-3">{t("homeLocation")}</p>
                                 {/* Urban */}
                                 <div className="flex items-center mb-3">
                                     <input value="Urban"
@@ -247,7 +250,7 @@ const FormAdopt = () => {
                                         id="Urban"
                                         checked={Form.homeLocation === "Urban"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="Urban" className="ml-2 cursor-pointer text-[20px]">Urban</label>
+                                    <label htmlFor="Urban" className="ml-2 cursor-pointer text-[20px]">{t("urban")}</label>
                                 </div>
                                 {/* Rural */}
                                 <div className="flex items-center mb-3">
@@ -257,7 +260,7 @@ const FormAdopt = () => {
                                         name="homeLocation" id="Rural"
                                         checked={Form.homeLocation === "Rural"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="Rural" className="ml-2 cursor-pointer text-[20px]">Rural</label>
+                                    <label htmlFor="Rural" className="ml-2 cursor-pointer text-[20px]">{t("rural")}</label>
                                 </div>
                                 {/* Homeless */}
                                 <div className="flex items-center mb-3">
@@ -268,14 +271,14 @@ const FormAdopt = () => {
                                         id="Homeless"
                                         checked={Form.homeLocation === "Homeless"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="Homeless" className="ml-2 cursor-pointer text-[20px]">Homeless</label>
+                                    <label htmlFor="Homeless" className="ml-2 cursor-pointer text-[20px]">{t("homeless")}</label>
                                 </div>
                                 {Form.homeLocation === "" && accept && (<p className='text-err'>{err.errAllInput}</p>)}
                             </div>
                             {/* animal Experience */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-6">
                                 <p className="w-full font-medium text-[21px] mb-3">
-                                    Do you have any previous experience in raising animals?
+                                    {t("animalExperience")}
                                 </p>
                                 {/* yes */}
                                 <div className="flex items-center mb-3">
@@ -286,7 +289,7 @@ const FormAdopt = () => {
                                         id="trueAnimalExperience"
                                         checked={Form.animalExperience === "true"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="trueAnimalExperience" className="ml-2 cursor-pointer text-[20px]">Yes</label>
+                                    <label htmlFor="trueAnimalExperience" className="ml-2 cursor-pointer text-[20px]">{t("yes")}</label>
                                 </div>
                                 {/* no */}
                                 <div className="flex items-center mb-3">
@@ -297,14 +300,14 @@ const FormAdopt = () => {
                                         id="falseAnimalExperience"
                                         checked={Form.animalExperience === "false"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="falseAnimalExperience" className="ml-2 cursor-pointer text-[20px]">No</label>
+                                    <label htmlFor="falseAnimalExperience" className="ml-2 cursor-pointer text-[20px]">{t("no")}</label>
                                 </div>
                                 {Form.animalExperience === "" && accept && (<p className='text-err'>{err.errAllInput}</p>)}
                             </div>
                             {/* understands Socializing */}
                             <div className="mb-5 py-6 px-6">
                                 <p className="w-full font-medium text-[21px] mb-3">
-                                    Do you understand the importance of socializing animals?
+                                    {t("understandsSocializing")}
                                 </p>
                                 {/* yes */}
                                 <div className="flex items-center mb-3">
@@ -315,7 +318,7 @@ const FormAdopt = () => {
                                         id="trueUnderstandsSocializing"
                                         checked={Form.understandsSocializing === "true"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="trueUnderstandsSocializing" className="ml-2 cursor-pointer text-[20px]">Yes</label>
+                                    <label htmlFor="trueUnderstandsSocializing" className="ml-2 cursor-pointer text-[20px]">{t("yes")}</label>
                                 </div>
                                 {/* no */}
                                 <div className="flex items-center mb-3">
@@ -326,15 +329,14 @@ const FormAdopt = () => {
                                         id="falseUnderstandsSocializing"
                                         checked={Form.understandsSocializing === "false"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="falseUnderstandsSocializing" className="ml-2 cursor-pointer text-[20px]">No</label>
+                                    <label htmlFor="falseUnderstandsSocializing" className="ml-2 cursor-pointer text-[20px]">{t("no")}</label>
                                 </div>
                                 {Form.understandsSocializing === "" && accept && (<p className='text-err'>{err.errAllInput}</p>)}
                             </div>
                             {/* additional Helpers */}
                             <div className="mb-5 bg-[#F5F5F5] py-6 px-6">
                                 <p className="w-full font-medium text-[21px] mb-3">
-                                    Are there other individuals in the home who help with
-                                    this task?
+                                    {t("additionalHelpers")}
                                 </p>
                                 {/* yes */}
                                 <div className="flex items-center mb-3">
@@ -345,7 +347,7 @@ const FormAdopt = () => {
                                         id="trueAdditionalHelpers"
                                         checked={Form.additionalHelpers === "true"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="trueAdditionalHelpers" className="ml-2 cursor-pointer text-[20px]">Yes</label>
+                                    <label htmlFor="trueAdditionalHelpers" className="ml-2 cursor-pointer text-[20px]">{t("yes")}</label>
                                 </div>
                                 {/* no */}
                                 <div className="flex items-center mb-3">
@@ -356,14 +358,14 @@ const FormAdopt = () => {
                                         id="falseAdditionalHelpers"
                                         checked={Form.additionalHelpers === "false"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="falseAdditionalHelpers" className="ml-2 cursor-pointer text-[20px]">No</label>
+                                    <label htmlFor="falseAdditionalHelpers" className="ml-2 cursor-pointer text-[20px]">{t("no")}</label>
                                 </div>
                                 {Form.additionalHelpers === "" && accept && (<p className='text-err'>{err.errAllInput}</p>)}
                             </div>
                             {/* budget For Animal Care */}
                             <div className="mb-5 py-6 px-6">
                                 <p className="w-full font-medium text-[21px] mb-3">
-                                    Do you have a budget allocated for animal care?
+                                    {t("budgetForAnimalCare")}
                                 </p>
                                 {/* yes */}
                                 <div className="flex items-center mb-3">
@@ -374,7 +376,7 @@ const FormAdopt = () => {
                                         id="trueBudget"
                                         checked={Form.budgetForAnimalCare === "true"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="true" className="ml-2 cursor-pointer text-[20px]">Yes</label>
+                                    <label htmlFor="true" className="ml-2 cursor-pointer text-[20px]">{t("yes")}</label>
                                 </div>
                                 {/* no */}
                                 <div className="flex items-center mb-3">
@@ -385,7 +387,7 @@ const FormAdopt = () => {
                                         id="falseBudget"
                                         checked={Form.budgetForAnimalCare === "false"}
                                         onChange={HandleChange} />
-                                    <label htmlFor="falseBudget" className="ml-2 cursor-pointer text-[20px]">No</label>
+                                    <label htmlFor="falseBudget" className="ml-2 cursor-pointer text-[20px]">{t("no")}</label>
                                 </div>
                                 {Form.budgetForAnimalCare === "" && accept && (<p className='text-err'>{err.errAllInput}</p>)}
                             </div>
@@ -394,7 +396,7 @@ const FormAdopt = () => {
                             ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}
                                 disabled={isLoading}
                             >
-                                {isLoading ? <BeatLoader color="#fff" /> : <span>Send Message</span>}
+                                {isLoading ? <BeatLoader color="#fff" /> : <span>{t("sendMessage")}</span>}
                             </button>
                         </form>
                     </div>
