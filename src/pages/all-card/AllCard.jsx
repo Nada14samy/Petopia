@@ -69,8 +69,8 @@ const AllCard = (props) =>{
     let pageNumber = [];
      for (let i = 1; i <= totalResult; i++) {pageNumber.push(
         <li key={i} className={`flex text-[18px] items-center justify-center px-4 h-10 border-[#000] border-[1px] ${page === i ? "bg-primary text-[#fff] cursor-not-allowed" : "text-[#000] bg-white cursor-pointer"}`} onClick={()=>setPage(i)}>{i}</li>
-     )}
-    console.log(pageNumber);
+     )};
+     
   return (
     <>
         <Header />
@@ -87,7 +87,7 @@ const AllCard = (props) =>{
                               {showData}
                               <div className="w-full mt-10 flex justify-center items-center gap-5">
                                   <nav aria-label="Page navigation example">
-                                      <ul class="inline-flex -space-x-px text-base h-10">
+                                      <ul className="inline-flex -space-x-px text-base h-10">
                                           <li className={`flex items-center justify-center px-4 h-10 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white
                                                 ${page === 1 ? "cursor-not-allowed opacity-50": "cursor-pointer"}
                                           `}
