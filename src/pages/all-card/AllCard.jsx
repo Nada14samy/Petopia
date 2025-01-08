@@ -18,6 +18,7 @@ import bg_dog from "../../images/homepage/Ellipse4.png";
 import bg_new from "../../images/background-image/image19.png";
 import Dogs_image from "../../images/section-cards/dogs.png";
 import New_image from "../../images/section-cards/new.png";
+
 // icon
 import { FaAngleDoubleRight ,FaAngleDoubleLeft } from "react-icons/fa";
 
@@ -26,11 +27,8 @@ const AllCard = (props) =>{
     const [cards , setCards] = useState([]);
     const [isLoading , setIsLoading] = useState(true);
     // pagination
-
     const [page , setPage] = useState(1);
     const [totalResult , setTotalResult] = useState(0);
-    console.log(totalResult);
-    console.log(page)
 
     // card
     const showData = cards.map((item,index)=>(
@@ -42,10 +40,7 @@ const AllCard = (props) =>{
         const fetchTotalResult = async ()=>{
             try{
                let res= await axios.get(`${API_BASE_URL}pets?type=${category}`)
-                console.log("totalResult: " , res.data.results)
                 setTotalResult(Math.ceil(res.data.results / 10))
-                console.log("totalResult: " , Math.ceil(res.data.results / 10));
-
             }catch(err){
                 console.log(err);
             }finally{
@@ -61,7 +56,6 @@ const AllCard = (props) =>{
             try{
                let res= await axios.get(`${API_BASE_URL}pets?type=${category}&page=${page}&limit=10`)
                 setCards(res.data.data.data);
-                // console.log(res.data)
             }catch(err){
                 console.log(err);
             }finally{
